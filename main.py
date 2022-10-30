@@ -2,7 +2,7 @@ from tkinter import*
 from tkinter import ttk
 import time
 
-window=ttk.Notebook(height=1000,width=1000)
+window=ttk.Notebook(height=2000,width=2500)
 
 front=ttk.Frame(window)
 frame1=ttk.Frame(window)
@@ -16,391 +16,184 @@ frame8=ttk.Frame(window)
 frame9=ttk.Frame(window)
 frame10=ttk.Frame(window)
 
-
 global correct
 correct=0
 global incorrect
 incorrect=0
 global ans
-ans=[]
+ans={1:'',2:'',3:'',4:'',5:'',6:'',7:'',8:'',9:'',10:''}
+global time_arr
+time_arr=[]
 
 
 def quiz(window):
-
+    global front
     window.add(front,text='Welcome')
-    Button(front,text="start",command=lambda:[starttime(),front.destroy()]).grid(row=0,column=0)
+    Label(front,text="Name").grid(row=1,column=1)
+    global t1
+    t1=Entry(front)
+    t1.grid(row=1,column=2)
+    Button(front,text="start",command=lambda:[starttime(),sample()]).grid(row=2,column=1)
     
     window.add(frame1, text='Question1')
 
-    Label(frame1, text='Total keywords in python',font=('Arial',50,'bold')).grid(row=2,column=2)
-    Button(frame1, text='33',font=('Arial',25,'bold'),bg='yellow',command=window_correct).grid(row=3,column=1)
-    Button(frame1, text='31',font=('Arial',25,'bold'),bg='grey',command=window_incorrect).grid(row=3,column=2)
-    Button(frame1, text='30',font=('Arial',25,'bold'),bg='pink',command=window_incorrect).grid(row=3,column=3)
-    Button(frame1, text="Next",font=('Arial',25,'bold'),bg='pink',command=lambda:[frame1.destroy(),starttime()]).grid(row=4,column=2)
+    Label(frame1, text='1. Which among the following state produces maximum raw silk in India?',font=('Arial',30,'bold')).place(x=40,y=20)
+    Button(frame1, text='a.Bihar',font=('Arial',25,'bold'),bg='violet',command=lambda:window_incorrect(1)).place(x=160,y=150)
+    Button(frame1, text='b.Assam',font=('Arial',25,'bold'),bg='violet',command=lambda:window_incorrect(1)).place(x=160,y=250)
+    Button(frame1, text='c.karnataka',font=('Arial',25,'bold'),bg='violet',command=lambda:window_correct(1)).place(x=160,y=350)
+    Button(frame1, text="Next",font=('Arial',25,'bold'),bg='grey',command=lambda:[frame1.destroy(),starttime()]).place(x=1000,y=500)
 
     
     
     window.add(frame2, text='Question2')
 
-    Label(frame2, text='aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',font=('Arial',50,'bold')).grid(row=2,column=2)
-    Button(frame2, text='a',font=('Arial',25,'bold'),bg='yellow',command=window2_incorrect).grid(row=3,column=1)
-    Button(frame2, text='',font=('Arial',25,'bold'),bg='grey',command=window2_correct).grid(row=3,column=2)
-    Button(frame2, text='',font=('Arial',25,'bold'),bg='pink',command=window2_incorrect).grid(row=3,column=3)
-    Button(frame2, text="Next",font=('Arial',25,'bold'),bg='pink',command=lambda:[frame2.destroy(),starttime()]).grid(row=4,column=2)
+    Label(frame2, text='2. Who among the following was known as Flying Sikh?',font=('Arial',30,'bold')).place(x=40,y=20)
+    Button(frame2, text='a.Milkha Singh',font=('Arial',25,'bold'),bg='pink',command=lambda:window_correct(2)).place(x=160,y=150)
+    Button(frame2, text='b.Harbhajan Singh',font=('Arial',25,'bold'),bg='pink',command=lambda:window_incorrect(2)).place(x=160,y=250)
+    Button(frame2, text='c.Yuvaraj Singh',font=('Arial',25,'bold'),bg='pink',command=lambda:window_incorrect(2)).place(x=160,y=350)
+    Button(frame2, text="Next",font=('Arial',25,'bold'),bg='grey',command=lambda:[frame2.destroy(),starttime()]).place(x=1000,y=500)
 
     window.add(frame3, text='Question3')
 
-    Label(frame3, text='bbbbbbbbbbbbbbbbbbbbbbbbb',font=('Arial',50,'bold')).grid(row=2,column=2)
-    Button(frame3, text='',font=('Arial',25,'bold'),bg='yellow',command=window3_correct).grid(row=3,column=1)
-    Button(frame3, text='',font=('Arial',25,'bold'),bg='grey',command=window3_incorrect).grid(row=3,column=2)
-    Button(frame3, text='',font=('Arial',25,'bold'),bg='pink',command=window3_correct).grid(row=3,column=3)
-    Button(frame3, text="Next",font=('Arial',25,'bold'),bg='pink',command=lambda:[frame3.destroy(),starttime()]).grid(row=4,column=2)
+    Label(frame3, text='3. Which of the following is indicated by the colour of a star?',font=('Arial',30,'bold')).place(x=40,y=20)
+    Button(frame3, text='a.Weight',font=('Arial',25,'bold'),bg='light blue',command=lambda:window_incorrect(3)).place(x=160,y=150)
+    Button(frame3, text='b.Distance',font=('Arial',25,'bold'),bg='light blue',command=lambda:window_incorrect(3)).place(x=160,y=250)
+    Button(frame3, text='c.Temperature',font=('Arial',25,'bold'),bg='light blue',command=lambda:window_correct(3)).place(x=160,y=350)
+    Button(frame3, text="Next",font=('Arial',25,'bold'),bg='grey',command=lambda:[frame3.destroy(),starttime()]).place(x=1000,y=500)
 
     window.add(frame4, text='Question4')
 
-    Label(frame4, text='',font=('Arial',50,'bold')).grid(row=2,column=2)
-    Button(frame4, text='',font=('Arial',25,'bold'),bg='yellow',command=window4_incorrect).grid(row=3,column=1)
-    Button(frame4, text='',font=('Arial',25,'bold'),bg='grey',command=window4_correct).grid(row=3,column=2)
-    Button(frame4, text='',font=('Arial',25,'bold'),bg='pink',command=window4_incorrect).grid(row=3,column=3)
-    Button(frame4, text="Next",font=('Arial',25,'bold'),bg='pink',command=lambda:[frame4.destroy(),starttime()]).grid(row=4,column=2)
+    Label(frame4, text='4. Patanjali is well known for the compilation of ',font=('Arial',30,'bold')).place(x=40,y=20)
+    Button(frame4, text='a.Yoga Sutra',font=('Arial',25,'bold'),bg='light green',command=lambda:window_correct(4)).place(x=160,y=150)
+    Button(frame4, text='b.Panchatantra',font=('Arial',25,'bold'),bg='light green',command=lambda:window_incorrect(4)).place(x=160,y=250)
+    Button(frame4, text='c.Brahma Sutra',font=('Arial',25,'bold'),bg='light green',command=lambda:window_incorrect(4)).place(x=160,y=350)
+    Button(frame4, text="Next",font=('Arial',25,'bold'),bg='grey',command=lambda:[frame4.destroy(),starttime()]).place(x=1000,y=500)
 
     window.add(frame5, text='Question5')
 
-    Label(frame5, text='',font=('Arial',50,'bold')).grid(row=2,column=2)
-    Button(frame5, text='',font=('Arial',25,'bold'),bg='yellow',command=window5_correct).grid(row=3,column=1)
-    Button(frame5, text='',font=('Arial',25,'bold'),bg='grey',command=window5_incorrect).grid(row=3,column=2)
-    Button(frame5, text='',font=('Arial',25,'bold'),bg='pink',command=window5_correct).grid(row=3,column=3)
-    Button(frame5, text="Next",font=('Arial',25,'bold'),bg='pink',command=lambda:[frame5.destroy(),starttime()]).grid(row=4,column=2)
+    Label(frame5, text='5. The hottest planet in the solar system?',font=('Arial',30,'bold')).place(x=40,y=20)
+    Button(frame5, text='a.Mercury',font=('Arial',25,'bold'),bg='orange',command=lambda:window_incorrect(5)).place(x=160,y=150)
+    Button(frame5, text='b.Venus',font=('Arial',25,'bold'),bg='orange',command=lambda:window_correct(5)).place(x=160,y=250)
+    Button(frame5, text='c.Mars',font=('Arial',25,'bold'),bg='orange',command=lambda:window_incorrect(5)).place(x=160,y=350)
+    Button(frame5, text="Next",font=('Arial',25,'bold'),bg='grey',command=lambda:[frame5.destroy(),starttime()]).place(x=1000,y=500)
 
     window.add(frame6, text='Question6')
 
-    Label(frame6, text='',font=('Arial',50,'bold')).grid(row=2,column=2)
-    Button(frame6, text='',font=('Arial',25,'bold'),bg='yellow',command=window6_incorrect).grid(row=3,column=1)
-    Button(frame6, text='',font=('Arial',25,'bold'),bg='grey',command=window6_correct).grid(row=3,column=2)
-    Button(frame6, text='',font=('Arial',25,'bold'),bg='pink',command=window6_incorrect).grid(row=3,column=3)
-    Button(frame6, text="Next",font=('Arial',25,'bold'),bg='pink',command=lambda:[frame6.destroy(),starttime()]).grid(row=4,column=2)
+    Label(frame6, text='6. Which is the governing body Chess in the world?',font=('Arial',30,'bold')).place(x=40,y=20)
+    Button(frame6, text='a.World Chess Federation ',font=('Arial',25,'bold'),bg='plum',command=lambda:window_correct(6)).place(x=160,y=150)
+    Button(frame6, text='b.World Chess Association ',font=('Arial',25,'bold'),bg='plum',command=lambda:window_incorrect(6)).place(x=160,y=250)
+    Button(frame6, text='c.World Chess Organisation',font=('Arial',25,'bold'),bg='plum',command=lambda:window_incorrect(6)).place(x=160,y=350)
+    Button(frame6, text="Next",font=('Arial',25,'bold'),bg='grey',command=lambda:[frame6.destroy(),starttime()]).place(x=1000,y=500)
 
     window.add(frame7, text='Question7')
 
-    Label(frame7, text='',font=('Arial',50,'bold')).grid(row=2,column=2)
-    Button(frame7, text='',font=('Arial',25,'bold'),bg='yellow',command=window7_correct).grid(row=3,column=1)
-    Button(frame7, text='',font=('Arial',25,'bold'),bg='grey',command=window7_incorrect).grid(row=3,column=2)
-    Button(frame7, text='',font=('Arial',25,'bold'),bg='pink',command=window7_correct).grid(row=3,column=3)
-    Button(frame7, text="Next",font=('Arial',25,'bold'),bg='pink',command=lambda:[frame7.destroy(),starttime()]).grid(row=4,column=2)
+    Label(frame7, text='7. In order of their distances from the Sun, which of the following planets \n lie between Mars and Uranus?',font=('Arial',30,'bold')).place(x=40,y=20)
+    Button(frame7, text='a.Earth and Jupiter',font=('Arial',25,'bold'),bg='lavender',command=lambda:window_incorrect(7)).place(x=160,y=150)
+    Button(frame7, text='b.Jupiter and Saturn',font=('Arial',25,'bold'),bg='lavender',command=lambda:window_correct(7)).place(x=160,y=250)
+    Button(frame7, text='c.Saturn and Earth',font=('Arial',25,'bold'),bg='lavender',command=lambda:window_incorrect(7)).place(x=160,y=350)
+    Button(frame7, text="Next",font=('Arial',25,'bold'),bg='grey',command=lambda:[frame7.destroy(),starttime()]).place(x=1000,y=500)
 
     window.add(frame8, text='Question8')
 
-    Label(frame8, text='',font=('Arial',50,'bold')).grid(row=2,column=2)
-    Button(frame8, text='',font=('Arial',25,'bold'),bg='yellow',command=window8_incorrect).grid(row=3,column=1)
-    Button(frame8, text='',font=('Arial',25,'bold'),bg='grey',command=window8_correct).grid(row=3,column=2)
-    Button(frame8, text='',font=('Arial',25,'bold'),bg='pink',command=window8_incorrect).grid(row=3,column=3)
-    Button(frame8, text="Next",font=('Arial',25,'bold'),bg='pink',command=lambda:[frame8.destroy(),starttime()]).grid(row=4,column=2)
+    Label(frame8, text='8. The water comes to Indira Gandhi Canal from the following Rivers?',font=('Arial',30,'bold')).place(x=40,y=20)
+    Button(frame8, text='a.Sutlej Only',font=('Arial',25,'bold'),bg='gold',command=lambda:window_incorrect(8)).place(x=160,y=150)
+    Button(frame8, text='b.Sutlej & Beas',font=('Arial',25,'bold'),bg='gold',command=lambda:window_correct(8)).place(x=160,y=250)
+    Button(frame8, text='c.Sutlej , Beas & Ravi',font=('Arial',25,'bold'),bg='gold',command=lambda:window_incorrect(8)).place(x=160,y=350)
+    Button(frame8, text="Next",font=('Arial',25,'bold'),bg='grey',command=lambda:[frame8.destroy(),starttime()]).place(x=1000,y=500)
 
     window.add(frame9, text='Question9')
 
-    Label(frame9, text='',font=('Arial',50,'bold')).grid(row=2,column=2)
-    Button(frame9, text='',font=('Arial',25,'bold'),bg='yellow',command=window9_correct).grid(row=3,column=1)
-    Button(frame9, text='',font=('Arial',25,'bold'),bg='grey',command=window9_incorrect).grid(row=3,column=2)
-    Button(frame9, text='',font=('Arial',25,'bold'),bg='pink',command=window9_correct).grid(row=3,column=3)
-    Button(frame9, text="Next",font=('Arial',25,'bold'),bg='pink',command=lambda:[frame9.destroy(),starttime()]).grid(row=4,column=2)
+    Label(frame9, text='9. A blackhole is a ',font=('Arial',30,'bold')).place(x=40,y=20)
+    Button(frame9, text='a.Contracted star with intense gravitational pull',font=('Arial',25,'bold'),bg='pale violet red',command=lambda:window_correct(9)).place(x=160,y=150)
+    Button(frame9, text='b.Star with very low surface temperature',font=('Arial',25,'bold'),bg='pale violet red',command=lambda:window_incorrect(9)).place(x=160,y=250)
+    Button(frame9, text='c.Star with no atmosphere',font=('Arial',25,'bold'),bg='pale violet red',command=lambda:window_incorrect(9)).place(x=160,y=350)
+    Button(frame9, text="Next",font=('Arial',25,'bold'),bg='grey',command=lambda:[frame9.destroy(),starttime()]).place(x=1000,y=500)
 
     window.add(frame10, text='Question10')
 
 
-    Label(frame10, text='',font=('Arial',50,'bold')).grid(row=2,column=2)
-    Button(frame10, text='',font=('Arial',25,'bold'),bg='yellow',command=window10_incorrect).grid(row=3,column=1)
-    Button(frame10, text='',font=('Arial',25,'bold'),bg='grey',command=window10_correct).grid(row=3,column=2)
-    Button(frame10, text='',font=('Arial',25,'bold'),bg='pink',command=window10_incorrect).grid(row=3,column=3)
-    Button(frame10, text='Submit',font=('Arial',25,'bold'),bg='pink',command=lambda:[frame10.destroy(),disp_result(),window.destroy()]).grid(row=4,column=4)
+    Label(frame10, text='10. India played ther first T20 match against ?',font=('Arial',30,'bold')).place(x=40,y=20)
+    Button(frame10, text='a.Australia',font=('Arial',25,'bold'),bg='pale green',command=lambda:window_incorrect(10)).place(x=160,y=150)
+    Button(frame10, text='b.Pakistan',font=('Arial',25,'bold'),bg='pale green',command=lambda:window_incorrect(10)).place(x=160,y=250)
+    Button(frame10, text='c.South Africa',font=('Arial',25,'bold'),bg='pale green',command=lambda:window_correct(10)).place(x=160,y=350)
+    Button(frame10, text='Submit',font=('Arial',25,'bold'),bg='grey',command=lambda:[frame10.destroy(),disp_result()]).place(x=1000,y=500)
 
+
+def sample():
+    global t1
+    global front
+    global name
+    name=t1.get()
+    front.destroy()
 
 def starttime():
     global start_time
     start_time=time.time()
 
 
-def window_correct():
+def window_correct(qid):
     global stop_time
     global start_time
     stop_time=time.time()
     tot=stop_time-start_time
-    print(tot)
     global correct
-    correct+=1
-    global ans
-    ans.append("1")
-    ans.append("correct")
-    ans.append(tot)
-
-def window_incorrect():
-    global stop_time
-    global start_time
-    stop_time=time.time()
-    tot=stop_time-start_time
-    print(tot)
     global incorrect
-    incorrect+=1
     global ans
-    ans.append("1")
-    ans.append("incorrect")
-    ans.append(tot)
+    if ans[qid]=='':
+        pass
+    else:
+        incorrect-=1
+    correct+=1
+    global time_arr
+    ans[qid]="Correct"
+    time_arr.append(tot)
 
-def window2_correct():
+def window_incorrect(qid):
     global stop_time
     global start_time
     stop_time=time.time()
     tot=stop_time-start_time
-    print(tot)
+    global incorrect
     global correct
-    correct+=1
     global ans
-    ans.append("2")
-    ans.append("correct")
-    ans.append(tot)
-
-def window2_incorrect():
-    global stop_time
-    global start_time
-    stop_time=time.time()
-    tot=stop_time-start_time
-    print(tot)
-    global incorrect
+    if ans[qid]=='':
+        pass
+    else:
+        correct-=1
     incorrect+=1
-    global ans
-    ans.append("2")
-    ans.append("incorrect")
-    ans.append(tot)
+    global time_arr
+    ans[qid]="Incorrect"
+    time_arr.append(tot)
 
-def window3_correct():
-    global stop_time
-    global start_time
-    stop_time=time.time()
-    tot=stop_time-start_time
-    print(tot)
-    global correct
-    correct+=1
-    global ans
-    ans.append("3")
-    ans.append("correct")
-    ans.append(tot)
-
-def window3_incorrect():
-    global stop_time
-    global start_time
-    stop_time=time.time()
-    tot=stop_time-start_time
-    print(tot)
-    global incorrect
-    incorrect+=1
-    global ans
-    ans.append("3")
-    ans.append("incorrect")
-    ans.append(tot)
-
-def window4_correct():
-    global stop_time
-    global start_time
-    stop_time=time.time()
-    tot=stop_time-start_time
-    print(tot)
-    global correct
-    correct+=1
-    global ans
-    ans.append("4")
-    ans.append("correct")
-    ans.append(tot)
-
-def window4_incorrect():
-    global stop_time
-    global start_time
-    stop_time=time.time()
-    tot=stop_time-start_time
-    print(tot)
-    global incorrect
-    incorrect+=1
-    global ans
-    ans.append("4")
-    ans.append("incorrect")
-    ans.append(tot)
-
-def window5_correct():
-    global stop_time
-    global start_time
-    stop_time=time.time()
-    tot=stop_time-start_time
-    print(tot)
-    global correct
-    correct+=1
-    global ans
-    ans.append("5")
-    ans.append("correct")
-    ans.append(tot)
-
-def window5_incorrect():
-    global stop_time
-    global start_time
-    stop_time=time.time()
-    tot=stop_time-start_time
-    print(tot)
-    global incorrect
-    incorrect+=1
-    global ans
-    ans.append("5")
-    ans.append("incorrect")
-    ans.append(tot)
-
-def window6_correct():
-    global stop_time
-    global start_time
-    stop_time=time.time()
-    tot=stop_time-start_time
-    print(tot)
-    global correct
-    correct+=1
-    global ans
-    ans.append("6")
-    ans.append("correct")
-    ans.append(tot)
-
-def window6_incorrect():
-    global stop_time
-    global start_time
-    stop_time=time.time()
-    tot=stop_time-start_time
-    print(tot)
-    global incorrect
-    incorrect+=1
-    global ans
-    ans.append("6")
-    ans.append("incorrect")
-    ans.append(tot)
-
-def window7_correct():
-    global stop_time
-    global start_time
-    stop_time=time.time()
-    tot=stop_time-start_time
-    print(tot)
-    global correct
-    correct+=1
-    global ans
-    ans.append("7")
-    ans.append("correct")
-    ans.append(tot)
-
-def window7_incorrect():
-    global stop_time
-    global start_time
-    stop_time=time.time()
-    tot=stop_time-start_time
-    print(tot)
-    global incorrect
-    incorrect+=1
-    global ans
-    ans.append("7")
-    ans.append("incorrect")
-    ans.append(tot)
-
-def window8_correct():
-    global stop_time
-    global start_time
-    stop_time=time.time()
-    tot=stop_time-start_time
-    print(tot)
-    global correct
-    correct+=1
-    global ans
-    ans.append("8")
-    ans.append("correct")
-    ans.append(tot)
-
-def window8_incorrect():
-    global stop_time
-    global start_time
-    stop_time=time.time()
-    tot=stop_time-start_time
-    print(tot)
-    global incorrect
-    incorrect+=1
-    global ans
-    ans.append("8")
-    ans.append("incorrect")
-    ans.append(tot)
-
-def window9_correct():
-    global stop_time
-    global start_time
-    stop_time=time.time()
-    tot=stop_time-start_time
-    print(tot)
-    global correct
-    correct+=1
-    global ans
-    ans.append("9")
-    ans.append("correct")
-    ans.append(tot)
-
-def window9_incorrect():
-    global stop_time
-    global start_time
-    stop_time=time.time()
-    tot=stop_time-start_time
-    print(tot)
-    global incorrect
-    incorrect+=1
-    global ans
-    ans.append("9")
-    ans.append("incorrect")
-    ans.append(tot)
-
-def window10_correct():
-    global stop_time
-    global start_time
-    stop_time=time.time()
-    tot=stop_time-start_time
-    print(tot)
-    global correct
-    correct+=1
-    global ans
-    ans.append("10")
-    ans.append("correct")
-    ans.append(tot)
-
-def window10_incorrect():
-    global stop_time
-    global start_time
-    stop_time=time.time()
-    tot=stop_time-start_time
-    print(tot)
-    global incorrect
-    incorrect+=1
-    global ans
-    ans.append("10")
-    ans.append("incorrect")
-    ans.append(tot)
     
     
 def disp_result():
-    hello=Tk()
+    window.destroy()
+    end_result=Tk()
     global incorrect
     global correct  
-    global ans   
-    Label(hello,text=correct).pack()
-    Label(hello,text=incorrect).pack()
-    for n in range(0,10):
-        s=ans[3*n]+"\t"+ans[3*n+1]+"\t"+"\t"+str(round(ans[3*n+2],2))
-        Label(hello,text=s).pack()
-    hello.mainloop()
+    global ans
+    global time_arr
+    global result
+    result=correct*10
+    correct1="Correct answers\t\t"+str(correct)
+    incorrect1="Incorrect answers\t\t"+str(incorrect)
+    result1="Result\t\t        "+str(result)+"%\n\n\n"
+    Label(end_result,text="RESULTS\n\n",font=15).pack()
+    Label(end_result,text=correct1).pack()
+    Label(end_result,text=incorrect1).pack()
+    Label(end_result,text=result1).pack()
+    head="Question    Answer chosen    Time taken(s)"
+    Label(end_result,text=head).pack()
+    for i in range(0,10):
+        s=str(i+1)+"\t"+ans[i+1]+"\t\t"+str(round(time_arr[i],2))
+        Label(end_result,text=s).pack()
+    end_result.mainloop()
+    
     
     
     
 
-    
-
-
-
-
-    
 quiz(window)
 
 window.pack()

@@ -1,6 +1,7 @@
 from tkinter import*
 from tkinter import ttk
 import time
+import matplotlib.pyplot as plt
 
 window=ttk.Notebook(height=2000,width=2500)
 
@@ -31,12 +32,13 @@ time_arr={1:1,2:2,3:3,4:4,5:5,6:6,7:7,8:8,9:9,10:10}
 def quiz(window):
     global front
     window.add(front,text='Welcome')
-    Label(front,text="Name").grid(row=1,column=1)
+    Label(front,text="THE MIND FIZZ",font=('Toffee',60,'bold'),bg='pale green').place(x=450,y=100)
+    Label(front,text="User Name",font=('Times New Roman',30,'bold'),bg='lavender').place(x=400,y=400)
     global t1
-    t1=Entry(front)
-    t1.grid(row=1,column=2)
-    Button(front,text="start",command=lambda:[starttime(),sample()]).grid(row=2,column=1)
-    
+    t1=Entry(front,font=('Times New Roman',30,'bold'))
+    t1.place(x=650,y=400)
+    Button(front,text="Start",font=('Times New Roman',30,'bold'),bg='pink',command=lambda:[starttime(),sample()]).place(x=1000,y=550)
+
     window.add(frame1,text='Question1')
 
     Label(frame1, text='1. Which among the following state produces maximum raw silk in India?',font=('Arial',30,'bold')).place(x=40,y=20)
@@ -124,8 +126,8 @@ def quiz(window):
 def sample():
     global t1
     global front
-    global name
-    name=t1.get()
+    global name1
+    name1=t1.get()
     front.destroy()
 
 def starttime():
@@ -173,6 +175,7 @@ def window_incorrect(qid):
 def disp_result():
     window.destroy()
     end_result=Tk()
+    end_result.title("Result Analysis")
     global incorrect
     global correct  
     global ans
@@ -189,7 +192,10 @@ def disp_result():
     head="Question    Answer chosen    Time taken(s)"
     Label(end_result,text=head).pack()
     for i in range(0,10):
-        s=str(i+1)+"\t"+ans[i+1]+"\t\t"+str(round(time_arr[i+1],2))
+        if ans[i+1]!='':
+            s=str(i+1)+"\t"+ans[i+1]+"\t\t"+str(round(time_arr[i+1],2))
+        else:
+            s=str(i+1)+"\t"+"Skipped"+"\t\t"+str(round(time_arr[i+1],2))
         Label(end_result,text=s).pack()
 
     Label(end_result,text="\n\nAnalysis").pack()
@@ -212,22 +218,49 @@ def disp_result():
         rev="Needs improvement"
     str2='space'+"  :  "+rev
     Label(end_result,text=str2).pack()
-
-
-
+    prev_performance()
     end_result.mainloop()
     
     
+def prev_performance():
+    global name1
+    global result
+    with open ("prev_records.csv","a+") as f1:
+        f1.write(name1)
+        f1.write(",")
+        f1.write(str(result))
+        f1.write("\n")
     
-    
+    class data:
+        def __init__(self,name,marks):
+            self.name=name
+            self.marks=marks
+    d=[]
+    with open ("prev_records.csv","r") as f1:
+        details=f1.readlines()
+        n=len(details)
+        for i in range(n):
+            name,marks=details[i].split(",")
+            marks=int(marks)
+            d.append(i)
+            d[i]=data(name,marks)
+    x=[]
+    y=[]
+    count=0
+    for k in range(len(d)):
+        if d[k].name==name1:
+            y.append(d[k].marks)
+            x.append(str(count+1))
+            count+=1
+    plt.bar(x,y)
+    plt.xlabel("Attempt number")
+    plt.ylabel("Result")
+    plt.title("Performance Tracker")
+    plt.show()
 
 quiz(window)
 
 window.pack()
 
-
-
 window.mainloop()
 
-
-    
